@@ -1,0 +1,5 @@
+Notes
+-----
+The folder sklearn that may be present in this directory is compiled for 32bit 
+and 64bit Intel Mac architectures. It's included for "easy installation" on Mac 
+systems. Windows users can install sklearn from the binary instead.

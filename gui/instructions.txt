@@ -1,0 +1,47 @@
+<h1 class="post-title">Instructions</h1>
+
+<p>This page will describe how to use the BatID software to classify your bat calls. Please follow all steps in order. If you have any questions or run into any problems, you can <a href="contact">contact the author</a> for help.</p>
+
+<h2 class="post-title">Step 1: Convert call files to zero-crossing format (if needed)</h2>
+
+<p>BatID processes bat calls in Anabat's zero-crossing format. If your calls were recorded with an Anabat detector, or another native zero-crossing detector, you can move on to Step 2.</p>
+	
+If your calls were recorded with a Songmeter detector (which saves full spectrum calls as wac files), follow the steps below to convert your files to zero-crossing format.</p>
+
+<p>
+<ol>
+	<li><p>Download and install the program wac2wav, produced by Wildlife Acoustics. You can download wac2wav from <a href="http://www.wildlifeacoustics.com/wa-php/downloads.php">this page</a>.</p></li>
+	
+	<li><p>Open the wac2wav program, and use the Add Files... button to add your files, and choose a destination folder to hold the new zero-crossing files. Check the box "Split Triggers" and check the box "Output Zero Crossing".</p></li>
+	
+	<li><p>Click the Convert Files button, and wait. Depending on how many files you have added, the conversion may take several hours or longer.</p></li>
+	
+</ol>
+</p>
+
+You now have a folder full of zero-crossing formatted bat call files, and you can move on to Step 2.
+
+<h2 class="post-title">Step 2: Run an AnalookW scan to characterize each call</h2>
+
+<p>The next step is to use the program AnalookW to examine each recorded bat call and extract some parameters describing it. These parameters including the duration of the call, the characteristic frequency, the slope of the call body, and other characteristics that are useful for telling calls of different species apart.</p>
+
+<p><b>NOTE FOR MAC USERS</b>: Unfortunately, the program AnalookW runs only on Windows, and there is no equivalent Mac software. If you are using a Mac, you will need access to a Windows machine to complete this step. Fortunately, this step is fairly fast (it should take only a few minutes), does not require you to install any software on the Windows computer, and only needs to be completed once. If you need to borrow a Windows computer to complete this step, I would recommend copying the entire batid folder, the AnalookW program, and your zero-crossing files onto a flash drive that you can plug into a Windows computer.</p>
+
+<p>At the end of this step, you will have a single text file, known as a scan file, containing the characteristics of all of your bat calls. This text file will be the input into the BatID classifier. To create this text file, follow the steps below.</p>
+
+<p>
+<ol>
+	<li><p>Download the program AnalookW, written by Chris Corben (an early developer of the Anabat platform). You can download AnalookW from <a href="http://users.lmi.net/corben/Beta/">this page</a>. This software runs only on Windows computers, and does not require any installation.</p></li>
+	
+	<li><p>Expand the AnalookW.zip file that you downloaded, open the AnalookW folder, and double click to launch the program AnalookW.</p></li>
+	
+	<li><p>(Optional Detour) At this stage, you can use AnalookW to examine your bat calls. If you'd like to do this, go to File -> Open and open one of your bat call files. You may see a sonogram of a bat call, or if you converted your zero-crossing files from Songmeter wac files, you may see a blank graph (indicating that this file contained only noise). Use the left and right arrows in the toolbar at the top of the program to view all of the bat files in this folder. You can learn more about the features of AnalookW by consulting the documentation that came with this program.</p></li>
+	
+	<li><p>We can now create the scan file that will contain the characterization of each bat call. Go to Filter -> Scan, and a dialog will pop up. In the Input section, click on the large gray box to the right of Tree, and choose the folder in which your call files are located (you can also choose a folder that contains many folders, each with of call files). In the Scan/Filter section, click the button next to Filter, click the large gray box to the right of Filter, and select the file 'allbats.abf', which is located in the 'demo' subfolder within the main batid folder. This filter will separate bat calls from noise. Under Output, click the large gray box, and chose a location to save your scan file, and the file name. Check the box called 'AML Measures', and make sure that none of the other boxes are checked. Finally, click the Run button at the bottom.</p></li>
+	
+</ol>
+</p>
+
+<h2 class="post-title">Step 3: Run the BatID classifier to identify each call to the species level</h2>
+
+<p>With the AnalookW scan file created and saved, you are now ready to classify the species associated with each bat call. To do this, simply click on the Classify link in the black bar at the top of this web page, and follow the instructions there.<p>

@@ -1,0 +1,95 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6" dir="ltr" lang="en-US"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" dir="ltr" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" dir="ltr" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" dir="ltr" lang="en-US"> <!--<![endif]-->
+<head>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>BatID - Simple open source bat call identification</title>
+
+	<meta name='robots' content='noindex,nofollow' />
+	<link rel='stylesheet' href='http://localhost:$localport/css' type='text/css' media='all' />
+
+	<!-- Appears js not needed, is slow to load
+	<script type='text/javascript' src='js?name=jquery.js'></script>
+	<script type='text/javascript' src='js?name=responsive-modernizr.js'></script>
+	<script type='text/javascript' src='js?name=responsive-scripts.js'></script>
+	<script type='text/javascript' src='js?name=responsive-plugins.js'></script>
+	-->
+
+	<script type="text/javascript"> 
+	    function changeText(submitId){
+	        var submit = document.getElementById(submitId);
+	        submit.value = 'Running, Please Wait...';
+	        return true;
+	    };
+	</script>
+
+</head>
+
+
+<body class="page page-template page-template-full-width-page-php">
+
+	<!-- Header -->
+	<div id="container" class="hfeed">
+
+		<div id="header">
+
+			<ul id="menu-top" class="top-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-724">&nbsp;
+				<!-- <a href="mailto:jkitzes@berkeley.edu">Contact Us</a></li>
+				<li id="menu-item-725" class="menu-item"><a href="http://erg.berkeley.edu/">ERG @ UC Berkeley</a> -->
+				</li>
+			</ul>
+
+
+			<div id="logo">
+				<!-- <h1 class="featured-title">BatID</h1><br /> -->
+			<a href="index"><img src="img?name=logo.png" width="300" height="100" alt="BatID" /></a>
+			</div>
+
+			<!-- <div id="widgets" class="top-widget">
+			<div id="text-8" class="widget_text">
+			<div class="textwidget">jkitzes@berkeley.edu</div>
+			</div>
+			</div> -->
+
+			<ul id="menu-main" class="menu">
+
+				<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="index">Home</a></li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="about">About BatID</a></li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="instructions">Instructions</a></li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="classify">Classify</a></li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://www.github.com/jkitzes/">Code</a></li>
+				<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="contact">Contact</a></li>
+				
+			</ul>
+
+		</div><!-- end of #header -->
+
+		<!-- Main body -->
+
+		<div id="wrapper" class="clearfix">
+
+				$pagebody
+
+		</div><!-- end of #wrapper -->
+
+		<div id="footer" class="clearfix">
+
+			<div id="footer-wrapper">
+
+				<div class="grid col-300 copyright">&copy; 2012 <a href="http://www.justinkitzes.com/">Justin Kitzes</a></div>
+				<div class="grid col-300 scroll-top"><a href="#scroll-top" title="scroll to top">&uarr;</a></div>
+				<div class="grid col-300 fit powered">Based on the <a href="http://themeid.com/responsive-theme/">Responsive</a> WordPress Theme</div>
+
+			</div><!-- end #footer-wrapper -->
+
+		</div><!-- end #footer -->
+				&nbsp;
+	</div><!-- end container -->
+</body>
+</html>

@@ -1,0 +1,16 @@
+.DS_Store
+*.aux
+*.bbl
+*.blg
+*.log
+*.fdb_latexmk
+*.gz
+~$*
+*.swp
+*.swo
+*.pyc
+.#*
+/demo/*.csv
+/demo/*.cfg
+/gui/images
+/gui/responsive

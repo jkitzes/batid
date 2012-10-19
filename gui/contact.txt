@@ -1,0 +1,5 @@
+<h1 class="post-title">Contact</h1>
+
+<p>You can contact the author of this software, Justin Kitzes, at <a href="mailto:jkitzes@berkeley.edu">jkitzes@berkeley.edu</a>.</p>
+
+<p>If you are interested in helping to support the development of BatID, or would like to report a bug or other bad behavior, please refer to the project's <a href="http://www.github.com/jkitzes/">Github page</a> and the Issue Tracker there.</p>

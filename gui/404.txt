@@ -1,0 +1,5 @@
+<h2 class="featured-subtitle">Sorry, page not found.</h2> 
+
+<div style="text-align:center;">
+Click <a href='index'>here</a> to return to home page.
+</div>

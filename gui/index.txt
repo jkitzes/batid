@@ -1,0 +1,15 @@
+<div id="content-full" class="grid col-940">
+
+<h1 class="featured-title">Welcome to BatID</h1>
+<h2 class="featured-subtitle">Simple, open source bat call identification</h2> 
+
+<p>The BatID software package provides an easy to use interface for identifying the species associated with bat calls recorded with Anabat or Songmeter detectors. The identification itself is done using a random forest classifier trained with known, expert identified calls from each species.</p>
+    
+    
+<div class="medium">
+	<a href="instructions" class="blue button">Instructions</a> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="classify" 
+	class="blue button">Start Classifier</a>
+</div>
+
+</div>
