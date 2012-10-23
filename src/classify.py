@@ -241,7 +241,7 @@ def classify_calls(aml_clean_path, class_path):
     pred = clf.predict_proba(X)
 
     # Save call_prob and call_bin files
-    header = 'path,folder,call,qual,' + spp_names_comma
+    header = 'path,folder,pass,qual,' + spp_names_comma
 
     file_callpr = open(os.path.join(output_dir, 'call_prob.csv'), 'w')
     file_callbi = open(os.path.join(output_dir, 'call_bin.csv'), 'w')
@@ -263,15 +263,15 @@ def classify_calls(aml_clean_path, class_path):
     file_callbi.close()
 
     # Summarize calls into passes
-    other_cols = [path, folder, qual]
+    other_cols = [path, folder]
     callp, predp, otherp = sum_group(call, pred, other_cols)
+    callp2, qualp = sum_group(call, qual)[0:2]
 
     # Save pass_prob and pass_bin file
     pathp = otherp[0]
     folderp = otherp[1]
-    qualp = otherp[2]
 
-    header = 'path,folder,call,qual,' + spp_names_comma
+    header = 'path,folder,pass,ncalls,qual,' + spp_names_comma
 
     file_passpr = open(os.path.join(output_dir, 'pass_prob.csv'), 'w')
     file_passbi = open(os.path.join(output_dir, 'pass_bin.csv'), 'w')
@@ -280,14 +280,20 @@ def classify_calls(aml_clean_path, class_path):
     file_passbi.write(header + '\n')
 
     for row in xrange(0, len(callp)):  # For all calls
-        row_comma_prob = ''.join([str(x)+',' for x in predp[row]])[:-1]
+        ncalls = np.sum(predp[row])
+        tpredp = predp[row] / ncalls  # Mean predp
+        tqual = qualp[row] / ncalls  # Mean qual
+
+        row_comma_prob = ''.join([str(x)+',' for x in tpredp])[:-1]
         row_bin = (predp[row] == predp[row].max()) + 0  # +0 makes int not bool
         row_comma_bin = ''.join([str(x)+',' for x in row_bin])[:-1]
 
         file_passpr.write(pathp[row] + ',' + folderp[row] + ',' + callp[row] + 
-                          ',' + str(qualp[row]) + ',' + row_comma_prob + '\n')
+                          ',' + str(ncalls) + ',' + str(tqual) + ',' + 
+                          row_comma_prob + '\n')
         file_passbi.write(pathp[row] + ',' + folderp[row] + ',' + callp[row] + 
-                          ',' + str(qualp[row]) + ',' + row_comma_bin + '\n')
+                          ',' + str(ncalls) + ',' + str(tqual) + ',' + 
+                          row_comma_bin + '\n')
 
     file_passpr.close()
     file_passbi.close()
