@@ -61,4 +61,4 @@ write_aml_clean(aml_path, aml_clean_path)
 # Classify species in demo
 aml_clean_path = os.path.join(demo_dir, 'demo-aml-clean.csv')
 class_path = os.path.join(data_dir, 'class-sfbay.pkl')
-classify_calls(aml_clean_path, class_path, param_dict['minqual'])
+classify_calls(aml_clean_path, class_path, param_dict['maxqual'])

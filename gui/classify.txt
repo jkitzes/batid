@@ -2,7 +2,7 @@
 
 <form method='get' action='run'>
 
-<h3>1. Choose a Anabat Scan File</h3>
+<h3>1. Choose an Anabat scan file</h3>
 See the <a href="instructions">Instruction page</a> for information on how to create this file. If you'd like to test the classifier, you can choose the file <b>demo-aml.txt</b> from the <b>demo</b> directory located in the BatID folder.
 
 	<p>
@@ -11,7 +11,7 @@ See the <a href="instructions">Instruction page</a> for information on how to cr
 		<span class="small"><a href="classify?get_file=True" class="white button">Browse</a></span>
 	</p>
 
-<h3>2. Select Region</h3>
+<h3>2. Select region</h3>
 Different classifiers are available for different geographic regions. In general, you should choose the smallest region that applies to your data (e.g., choose SF Bay instead of California if possible). More information about the reference calls used to fit each classifier can be found in the <a href="instructions">About page</a>.
 
 	<p>
@@ -20,7 +20,16 @@ Different classifiers are available for different geographic regions. In general
 	<input type=radio name="classifier" value="class-calif.pkl" /> California
 	</p>
 	
-<h3>3. Run Classifier</h3>
+<h3>3. Select a quality threshold</h3>
+Anabat assigns each call a qual score between zero and one, with lower scores indicating a higher quality recording. Calls with a qual value below the threshold below will be classified, and calls with a qual value above the threshold below will be ignored. To include all recorded calls, set this parameter to 1.
+
+		<p>
+		<b>Qual Threshold:</b> <br />
+		<input type=text name="maxqual"/>
+		</p>
+
+
+<h3>4. Run Classifier</h3>
 Please only click the Classify button once. It may take several minutes for your analysis to complete. The classifier will create and save several files in the same directory where your scan file is located. For a description of these files, see the <a href="about">About</a> page.
 	
 	<p><input type="submit" value="Classify" id="submitbutton" onclick="return changeText('submitbutton');"></p>

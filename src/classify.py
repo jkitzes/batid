@@ -38,7 +38,7 @@ def main():
     write_aml_clean(aml_path, aml_clean_path)
 
     # Run classifier and generate output
-    classify_calls(aml_clean_path, class_path, param_dict['minqual'])
+    classify_calls(aml_clean_path, class_path, param_dict['maxqual'])
     
 
 def write_aml_clean(aml_path, aml_clean_path, folder_exclude=[]):
@@ -202,7 +202,7 @@ def fit_classifier(aml_clean_path, class_path, test=False, performance=False,
         joblib.dump(clf, class_path, compress = 9)
 
 
-def classify_calls(aml_clean_path, class_path, minqual=0.3):
+def classify_calls(aml_clean_path, class_path, maxqual=0.3):
     '''Classify calls by species and save files.'''
 
     # Get dirs
@@ -221,8 +221,8 @@ def classify_calls(aml_clean_path, class_path, minqual=0.3):
     # Load aml_clean as recarray
     table = csv2rec(aml_clean_path)
 
-    # Only use calls with qual < minqual
-    table = table[table.qual < float(minqual)]
+    # Only use calls with qual < maxqual
+    table = table[table.qual < float(maxqual)]
 
     # Save path, folder, call, and qual fields for later
     path = table.path
