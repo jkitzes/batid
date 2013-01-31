@@ -1,6 +1,6 @@
 <h1 class="post-title">About BatID</h1>
 
-BatID is free, open source software to help users identify the species associated with bat calls recored using Anabat, Songmeter, or other similar detectors.
+BatID 1.0 is free, open source software to help users identify the species associated with bat calls recored using Anabat, Songmeter, or other similar detectors.
 
 <h2 class="post-title">Accuracy and other disclaimers</h2>
 
