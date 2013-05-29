@@ -3,7 +3,7 @@ Introduction
 
 Welcome to BatID. This software will enable you to quickly and easily identify 
 the species associated with bat calls recorded using Anabat or Songmeter bat 
-detectors. The current version of BatID is 1.0.
+detectors. The current version of BatID is 1.1.
 
 In order to get started, please read and follow the installation instructions 
 below.
