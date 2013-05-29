@@ -38,7 +38,7 @@ def main():
     write_aml_clean(aml_path, aml_clean_path)
 
     # Run classifier and generate output
-    classify_calls(aml_clean_path, class_path, param_dict['maxqual'])
+    classify_calls(aml_clean_path, class_path, param_dict)
     
 
 def write_aml_clean(aml_path, aml_clean_path, folder_exclude=[]):
@@ -202,7 +202,7 @@ def fit_classifier(aml_clean_path, class_path, test=False, performance=False,
         joblib.dump(clf, class_path, compress = 9)
 
 
-def classify_calls(aml_clean_path, class_path, maxqual=0.3):
+def classify_calls(aml_clean_path, class_path, param_dict):
     '''Classify calls by species and save files.'''
 
     # Get dirs
@@ -222,7 +222,7 @@ def classify_calls(aml_clean_path, class_path, maxqual=0.3):
     table = csv2rec(aml_clean_path)
 
     # Only use calls with qual < maxqual
-    table = table[table.qual < float(maxqual)]
+    table = table[table.qual < float(param_dict['maxqual'])]
 
     # Save path, folder, call, and qual fields for later
     path = table.path
@@ -262,40 +262,71 @@ def classify_calls(aml_clean_path, class_path, maxqual=0.3):
     file_callpr.close()
     file_callbi.close()
 
-    # Summarize calls into passes
-    other_cols = [path, folder]
-    callp, predp, otherp = sum_group(call, pred, other_cols)
-    callp2, qualp = sum_group(call, qual)[0:2]
+    # Get array of unique filenames (ie, passes, each may contain many calls)
+    passes = np.unique(call)
 
-    # Save pass_prob and pass_bin file
-    pathp = otherp[0]
-    folderp = otherp[1]
-
-    header = 'path,folder,pass,ncalls,qual,' + spp_names_comma
+    # Set up pass files for writing
+    header = 'path,folder,pass,ncalls,' + spp_names_comma
 
     file_passpr = open(os.path.join(output_dir, 'pass_prob.csv'), 'w')
+    file_passmaxpr = open(os.path.join(output_dir, 'pass_maxprob.csv'), 'w')
     file_passbi = open(os.path.join(output_dir, 'pass_bin.csv'), 'w')
 
     file_passpr.write(header + '\n')
-    file_passbi.write(header + '\n')
+    file_passmaxpr.write(header + '\n')
+    file_passbi.write(header + '\n')  
 
-    for row in xrange(0, len(callp)):  # For all calls
-        ncalls = np.sum(predp[row])
-        tpredp = predp[row] / ncalls  # Mean predp
-        tqual = qualp[row] / ncalls  # Mean qual
+    # Loop through passes
+    for this_pass in passes:
 
-        row_comma_prob = ''.join([str(x)+',' for x in tpredp])[:-1]
-        row_bin = (predp[row] == predp[row].max()) + 0  # +0 makes int not bool
-        row_comma_bin = ''.join([str(x)+',' for x in row_bin])[:-1]
+        # Get boolean locations in table of calls associated with this pass
+        these_calls = (call == this_pass)
+        first_call = np.argmax(these_calls)  # Row of first call
 
-        file_passpr.write(pathp[row] + ',' + folderp[row] + ',' + callp[row] + 
-                          ',' + str(ncalls) + ',' + str(tqual) + ',' + 
-                          row_comma_prob + '\n')
-        file_passbi.write(pathp[row] + ',' + folderp[row] + ',' + callp[row] + 
-                          ',' + str(ncalls) + ',' + str(tqual) + ',' + 
-                          row_comma_bin + '\n')
+        # Take subset of pred corresponding to calls in pass
+        these_preds = pred[these_calls]
 
+        # Get descriptor variables for this pass
+        this_path = path[first_call]
+        this_folder = folder[first_call]
+        this_ncalls = np.shape(these_preds)[0]
+
+        # Get summed probability for each species
+        if these_preds.shape[0] == 1:  # If only one call
+            pass_prob = these_preds / this_ncalls
+            pass_prob = pass_prob.flatten()
+        else:
+            pass_prob = np.sum(these_preds, 0) / this_ncalls
+
+        # Find the species with the maximum prob
+        pass_maxprob = (pass_prob == pass_prob.max()) + 0
+
+        # Find all calls with prob greater than minprob, cast to int
+        minprob_calls = (these_preds > float(param_dict['minprob'])) + 0
+
+        # Count number of calls for each species that meet minprob
+        num_minprob_calls = np.sum(minprob_calls, 0)
+
+        # Find all species with sufficient calls to meet mincalls
+        pass_bin = (num_minprob_calls >= float(param_dict['mincalls'])) + 0
+
+        # Write files
+        row_comma_prob = ''.join([str(x)+',' for x in pass_prob])[:-1]
+        file_passpr.write(this_path + ',' + this_folder + ',' + this_pass + 
+                          ',' + str(this_ncalls) + ',' + row_comma_prob + '\n')
+
+        row_comma_maxprob = ''.join([str(x)+',' for x in pass_maxprob])[:-1]
+        file_passmaxpr.write(this_path + ',' + this_folder + ',' + this_pass + 
+                             ',' + str(this_ncalls) + ',' + row_comma_maxprob + 
+                             '\n')
+
+        row_comma_bin = ''.join([str(x)+',' for x in pass_bin])[:-1]
+        file_passbi.write(this_path + ',' + this_folder + ',' + this_pass + 
+                          ',' + str(this_ncalls) + ',' + row_comma_bin + '\n')
+
+    # Close pass files
     file_passpr.close()
+    file_passmaxpr.close()
     file_passbi.close()
 
 

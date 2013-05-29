@@ -50,7 +50,7 @@ for tclass in class_list:
 # Process demo files with existing config file
 # ----------------------------------------------------------------------------
 
-# Get dictionary of paramters (query_dict in GUI)
+# Get dictionary of parameters (query_dict in GUI)
 param_dict = read_params(demo_dir)
 
 # Clean aml file for demo-aml
@@ -61,4 +61,4 @@ write_aml_clean(aml_path, aml_clean_path)
 # Classify species in demo
 aml_clean_path = os.path.join(demo_dir, 'demo-aml-clean.csv')
 class_path = os.path.join(data_dir, 'class-sfbay.pkl')
-classify_calls(aml_clean_path, class_path, param_dict['maxqual'])
+classify_calls(aml_clean_path, class_path, param_dict)
