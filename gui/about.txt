@@ -1,12 +1,10 @@
 <h1 class="post-title">About BatID</h1>
 
-BatID 1.0 is free, open source software to help users identify the species associated with bat calls recored using Anabat, Songmeter, or other similar detectors.
+BatID 1.1 is free, open source software to help users identify the species associated with bat calls recored using Anabat, Songmeter, or other similar detectors.
 
 <h2 class="post-title">Accuracy and other disclaimers</h2>
 
-<p><b>DISCLAIMER:</b> BatID is is no way 100% accurate at identifying bat calls! The overall accuracy of identified calls is approximately 82% (ie, 82% of known calls are identified correctly), and the overall accuracy of identified passes is approximately 88%. Please keep this in mind if the classifier indicates only a few instances of a rare species. For example, if the classifier states that you have 1,000 Brazilian free-tailed calls and 10 Townsend's big eared bat calls, it is likely that these 10 Townsend's calls would arise by chance simply by mis-classifying such a large number of free-tailed calls.</p>
-
-<p>For this reason, it is best if this classifier is used to get an overall sense of the types of species that are dominant at any location, and perhaps their relative activity levels in different types of habitats. This classifier is not recommended for attempting to identify the presence of rare species, or conducting a count of species richness, at any given site.</p>
+<p><b>DISCLAIMER:</b> BatID is is no way 100% accurate at identifying bat calls! The overall accuracy of identified calls is approximately 82% (ie, 82% of known calls are identified correctly), and the overall accuracy of identified passes is approximately 88% using the "maxprob" method (see below). Please keep this in mind if the classifier indicates only a few instances of a rare species. For example, if the classifier states that you have 1,000 Brazilian free-tailed calls and 10 Townsend's big eared bat calls, it is possible that these 10 Townsend's calls would arise by chance simply by mis-classifying such a large number of free-tailed calls. The classifier can be made more stringent, helping to avoid such misclassification issues for rare species, by modifying the minimum call number and minimum percentage certainty parameters on the classification page.</p>
 
 <h2 class="post-title">What it does</h2>
 
@@ -17,7 +15,8 @@ BatID 1.0 is free, open source software to help users identify the species assoc
 	<li><b>call_prob.csv</b> - a table containing each individual recorded call, and the probability that it was made by each species found in the classifier</li>
 	<li><b>call_bin.csv</b> - a table similar to that in call_prob, with with a "binary" classification for each call in which each call is assigned to the species with the highest probability of having made it</li>
 	<li><b>pass_prob.csv</b> - a table similar to call_prob.csv, but with each row corresponding to a single bat pass (ie, a single recording file) instead of to individual calls within passes. The probabilities in this table are just the sums of the probabilities for all calls within a pass.</li>
-	<li><b>pass_bin.csv</b> - a table similar to call_bin.csv, but constructed for passes instead of calls</li>
+	<li><b>pass_maxprob.csv</b> - a table similar to call_bin.csv, but constructed for passes instead of calls (the binary classification is based on the species with the highest mean probability across all calls in that pass)</li>
+	<li><b>pass_maxprob.csv</b> - a table in which passes are classified as a species only if the minimum call number and minimum percentage certainty parameters are met for a species</li>
 	<li><b>scanfilename-clean.csv</b> - a cleaned and formatted version of the scan file</li>
 	<li><b>config.cfg</b> - a configuration file that saves the options that you chose on the BatID classifier page</li>
 </ul>
@@ -39,5 +38,5 @@ BatID 1.0 is free, open source software to help users identify the species assoc
 
 <p>If you use BatID in a publication, please cite the software as follows:</p>
 
-<p>Kitzes, J. (2012). BatID (Version 1.0) [Software]. Available from http://www.github.com/jkitzes/batid/</p>
+<p>Kitzes, J. (2013). BatID (Version 1.1) [Software]. Available from http://github.com/jkitzes/batid/</p>
 
