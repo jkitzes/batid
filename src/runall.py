@@ -50,7 +50,7 @@ for tclass in class_list:
 # Process demo files with existing config file
 # ----------------------------------------------------------------------------
 
-# Get dictionary of paramters (query_dict in GUI)
+# Get dictionary of parameters (query_dict in GUI)
 param_dict = read_params(demo_dir)
 
 # Clean aml file for demo-aml
