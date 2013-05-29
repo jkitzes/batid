@@ -20,16 +20,28 @@ Different classifiers are available for different geographic regions. In general
 	<input type=radio name="classifier" value="class-calif.pkl" /> California
 	</p>
 	
-<h3>3. Select a quality threshold</h3>
-Anabat assigns each call a qual score between zero and one, with lower scores indicating a higher quality recording. Calls with a qual value below the threshold below will be classified, and calls with a qual value above the threshold below will be ignored. To include all recorded calls, set this parameter to 1.
+<h3>3. Select a quality threshold for calls</h3>
+Anabat assigns each call a qual score between zero and one, with lower scores indicating a higher quality recording. Calls with a qual value below the threshold below will be classified, and calls with a qual value above the threshold below will be ignored. To include all recorded calls, set this parameter to 1. A value of 0.3 is suggested.
+
+	<p>
+	<b>Qual Threshold:</b> <br />
+	<input type=text name="maxqual"/>
+	</p>
+
+<h3>4. Select criteria for identifying a pass</h3>
+The settings below allow the classification of passes to be made more or less stringent. A pass will be classified as a given species only if there are a minimum number of individual calls in a pass that are each classified with a minimum percentage certainty of being from that species. Note that it is possible, if these settings are lenient, that a given pass may be classified as more than one species. Values of 1 for the minimum number of calls and 0.9 for the minimum percentage percentage certainty are reasonable starting points.
 
 		<p>
-		<b>Qual Threshold:</b> <br />
-		<input type=text name="maxqual"/>
+		<b>Minimum number of calls:</b> <br />
+		<input type=text name="mincalls"/>
 		</p>
 
+		<p>
+		<b>Minimum Percentage Certainty (enter as a fraction):</b> <br />
+		<input type=text name="minprob"/>
+		</p>
 
-<h3>4. Run Classifier</h3>
+<h3>5. Run Classifier</h3>
 Please only click the Classify button once. It may take several minutes for your analysis to complete. The classifier will create and save several files in the same directory where your scan file is located. For a description of these files, see the <a href="about">About</a> page.
 	
 	<p><input type="submit" value="Classify" id="submitbutton" onclick="return changeText('submitbutton');"></p>
